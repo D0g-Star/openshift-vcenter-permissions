@@ -1,0 +1,4 @@
+Datastore.AllocateSpace
+Datastore.Browse
+Datastore.FileManagement
+InventoryService.Tagging.ObjectAttachable
