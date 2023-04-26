@@ -2,7 +2,7 @@
 Configure your OpenShift IPI installer's vCenter account with the needed permissions
 
 ## Description
-PowerCLI scipt creates the vCenter roles needed for the OpenShift IPI installer. It also applies these roles to the installer's vCenter service account.
+This is a PowerCLI script that creates the vCenter roles needed for the OpenShift IPI installer. It also applies these roles to the installer's vCenter account.
 
 The script prompts you for where you'll be installing OpenShift, similar to how the openshift-install tool prompts you.
 
