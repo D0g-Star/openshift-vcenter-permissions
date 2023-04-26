@@ -1,8 +1,8 @@
 # openshift-vcenter-permissions
-Configure your OpenShift IPI installer's vCenter account with the needed permissions
+Configure your OpenShift IPI installer's vCenter account with the needed permissions.
 
 ## Description
-This is a PowerCLI script that prompts you for where in vCenter you'll be installing OpenShift, similar to how the openshift-install tool prompts you. It creates the vCenter roles needed by the OpenShift IPI installer, and then it applies them to the installer's vCenter account, at the prompted locations with the vCenter hierarchy.
+This is a PowerCLI script that prompts you for where in vCenter you'll be installing OpenShift, similar to how the `openshift-install` tool prompts you. It then creates the vCenter roles needed for installer-provisioned infrastructure (IPI). Finally, it applies these roles to the installer's vCenter account, at the prompted locations within the vCenter hierarchy.
 
 ## Collisions
 During role creation, if it finds an existing role with the same name, it assumes it must be there from a previous run of this script, so it uses the role as-is to assign the permissions. If you want to make sure that the Role has all the needed permissions, you can delete it and let this script recreate it.
