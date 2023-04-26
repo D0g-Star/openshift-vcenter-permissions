@@ -13,4 +13,4 @@ During role creation, if it finds an existing role with the same name, it assume
 Last updated for OpenShift 4.12 and vCenter 7.0.2+, as detailed in this doc with a comically long URL:
 https://docs.openshift.com/container-platform/4.12/installing/installing_vsphere/installing-vsphere-installer-provisioned.html#installation-vsphere-installer-infra-requirements_installing-vsphere-installer-provisioned
 
-To update this script with new permissions, edit the text files in the [privileges](/privileges) directory. There is one text file for each group of permissions specified in the doc.
+To update this script for new versions, simply copy a list of permissions from the doc to the corresponding text file in the [privileges](/privileges) directory. There is one text file for each group of permissions (i.e. role) listed in the doc.
