@@ -57,8 +57,17 @@ $VMFolderPrivileges = Read-TextFileList "privileges/VMFolder.txt"
 # Prompt user for where they will be installing OpenShift
 $Server = Read-Host "vCenter FQDN"
 $vCenter = Connect-VIServer -Force -Server $Server
-$Username = Read-Host "OCP service account username"
-$User = Get-VIAccount $Username.Split("@")[0] -Domain $Username.Split("@")[1]
+$Username = Read-Host "OCP service account username (either DOMAIN\user or user@domain.com)"
+if ($Username.Contains("@")) {
+  $UserPortion = $Username.Split("@")[0]
+  $DomainPortion = $Username.Split("@")[1]
+  $UserObject = Get-VIAccount $UserPortion -Domain $DomainPortion
+}
+else {
+  $DomainPortion = $Username.Split('\')[0]
+  $UserPortion = $Username.Split('\')[1]
+  $UserObject = Get-VIAccount $UserPortion -Domain $DomainPortion
+}
 $DatacenterName = Read-Host "Datacenter"
 $Datacenter = Get-Datacenter $DatacenterName
 $ClusterName = Read-Host "Cluster"
@@ -88,15 +97,15 @@ if ($ResourcePoolName) {
 # manually created the vCenter-level permission via the UI, and then used Get-VIPermission to see what
 # entity it targeted: the root Datacenters folder.
 $RootFolder = Get-Folder "Datacenters" -Type Datacenter | Where-Object { $_.ParentId -eq $null }
-New-RoleAndPermission "$RolePrefix-vCenter" $vCenterPrivileges $User $RootFolder
-New-RoleAndPermission "$RolePrefix-Cluster" $ClusterPrivileges $User $Cluster
-New-RoleAndPermission "$RolePrefix-Datastore" $DatastorePrivileges $User $Datastore
-New-RoleAndPermission "$RolePrefix-Portgroup" $PortgroupPrivileges $User $Portgroup
+New-RoleAndPermission "$RolePrefix-vCenter" $vCenterPrivileges $UserObject $RootFolder
+New-RoleAndPermission "$RolePrefix-Cluster" $ClusterPrivileges $UserObject $Cluster
+New-RoleAndPermission "$RolePrefix-Datastore" $DatastorePrivileges $UserObject $Datastore
+New-RoleAndPermission "$RolePrefix-Portgroup" $PortgroupPrivileges $UserObject $Portgroup
 if ($VMFolderName){
-  New-RoleAndPermission "$RolePrefix-VMFolder" $VMFolderPrivileges $User $VMFolder
+  New-RoleAndPermission "$RolePrefix-VMFolder" $VMFolderPrivileges $UserObject $VMFolder
 }
 if ($ResourcePoolName) {
-  New-RoleAndPermission "$RolePrefix-ResourcePool" $ResourcePoolPrivileges $User $ResourcePool
+  New-RoleAndPermission "$RolePrefix-ResourcePool" $ResourcePoolPrivileges $UserObject $ResourcePool
 }
 
 Disconnect-VIServer -server $Server -Force -Confirm:$False
