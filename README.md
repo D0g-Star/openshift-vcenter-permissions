@@ -6,13 +6,13 @@ This PowerCLI script will take a vCenter account that you provide, and add the v
 ## Description
 This script prompts you for where in vCenter you'll be installing OpenShift, mirroring the prompts you'll receive later, when using the `openshift-install` tool. Note that this script will prompt you for 2 accounts: first for your credentials to connect to the vCenter API, and then for the name of the account that you'll use for the OpenShift IPI installation. It then connects to the vCenter API, creates the needed roles, and assigns them to the intallation account at the prompted locations within the vCenter hierarchy.
 
-After running this script, you can then run the `openshift-install` tool and provide it with credentials for the installation account.
+After running this script, you can then run the `openshift-install` tool and provide it with credentials of this installation account.
 
 ## Collisions
-During role creation, if it finds an existing role with the same name, it assumes it must be there from a previous run of this script, so it uses the role as-is to assign the permissions. If you want to make sure that the role has all the needed permissions, you can delete it and let this script recreate it.
+During role creation, if this script finds an existing role with the same name, it assumes it must be there from a previous run of itself, so it uses the role as-is to assign the permissions. If you want to make sure that the existing role has all the needed permissions, you can delete it and let this script recreate it.
 
 ## Optional VM Folder and Resource Pool
-If you wish to install OpenShift into a specific VM Folder and/or Resource Pool in vCenter, then provide those values when this script prompts you (or press ENTER to skip them). You'll also need to add the corresponding lines to the `platform.vsphere` section of your install-config.yaml:
+If you wish to install OpenShift into a specific VM Folder and/or Resource Pool in vCenter, then provide those values when the script prompts you (or press ENTER to skip them). You'll also need to add the corresponding lines to the `platform.vsphere` section of your **install-config.yaml**:
 ```
 ...
 platform:
