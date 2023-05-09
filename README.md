@@ -8,7 +8,7 @@ This is a PowerCLI script that prompts you for where in vCenter you'll be instal
 During role creation, if it finds an existing role with the same name, it assumes it must be there from a previous run of this script, so it uses the role as-is to assign the permissions. If you want to make sure that the role has all the needed permissions, you can delete it and let this script recreate it.
 
 ## Optional VM Folder and Resource Pool
-If you wish to install OpenShift into a specific VM Folder and/or Resource Pool in vCenter, then provide those values when this script prompt you (or press ENTER to skip them). In addition to providing those values to this script, you'll also need to add the corresponding lines to the `platform.vsphere` section of your install-config.yaml:
+If you wish to install OpenShift into a specific VM Folder and/or Resource Pool in vCenter, then provide those values when this script prompts you (or press ENTER to skip them). You'll also need to add the corresponding lines to the `platform.vsphere` section of your install-config.yaml:
 ```
 ...
 platform:
