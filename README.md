@@ -1,8 +1,12 @@
 # openshift-vcenter-permissions
-Configure your OpenShift IPI installer's vCenter account with the needed permissions.
+In order to install OpenShift with [installer provisioned infrastructure](https://docs.openshift.com/container-platform/4.12/installing/installing-preparing.html#installing-preparing-existing-components) (IPI), we need to provide a vCenter account that OpenShift can use to not only create its initial nodes, but also to [add and remove them](https://docs.openshift.com/container-platform/4.12/installing/installing_bare_metal_ipi/ipi-install-expanding-the-cluster.html) as needed, post-installation.
+
+This PowerCLI script will take a vCenter account that you provide, and add the vCenter permissions that are required for an OpenShift IPI installation.
 
 ## Description
-This is a PowerCLI script that prompts you for where in vCenter you'll be installing OpenShift, similar to how the `openshift-install` tool prompts you. It then creates the vCenter roles needed for installer-provisioned infrastructure (IPI). Finally, it applies these roles to the installer's vCenter account, at the prompted locations within the vCenter hierarchy.
+This script prompts you for where in vCenter you'll be installing OpenShift, mirroring the prompts you will receive later, when using the `openshift-install` tool. Note that this script will prompt you for 2 accounts - first for your credentials to connect to the vCenter API, and then for the name of that account that you will use for the OpenShift IPI installation. It then connects to the vCenter API, creates the needed roles, and assigns them to the intallation account at the prompted locations within the vCenter hierarchy.
+
+After running this script, you can then run the `openshift-install` tool, providing it with the installation account's credentials.
 
 ## Collisions
 During role creation, if it finds an existing role with the same name, it assumes it must be there from a previous run of this script, so it uses the role as-is to assign the permissions. If you want to make sure that the role has all the needed permissions, you can delete it and let this script recreate it.
