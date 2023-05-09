@@ -7,6 +7,19 @@ This is a PowerCLI script that prompts you for where in vCenter you'll be instal
 ## Collisions
 During role creation, if it finds an existing role with the same name, it assumes it must be there from a previous run of this script, so it uses the role as-is to assign the permissions. If you want to make sure that the role has all the needed permissions, you can delete it and let this script recreate it.
 
+## Optional VMFolder and "Resource Pool
+If you wish to install OpenShift into a specific VMFolder and/or Resource Pool in vCenter, then provide those values when prompted (press ENTER to skip them). In addition to providing those values to this script, you'll also need to add the corresponding lines to the `platform.vsphere` section of your install-config.yaml:
+```
+...
+platform:
+  vsphere:
+  ...
+    folder: /<datacenter_name>/vm/<folder_name>
+    resourcePool: /<datacenter_name>/host/<cluster_name>/Resources/<resource_pool_name>
+...
+```
+Note that the `/vm/` and `/host/` portions of the paths are required and should not be changed.
+
 ## Updates
 Last updated for OpenShift 4.12 and vCenter 7.0.2+, as detailed in this doc with a comically long URL:
 https://docs.openshift.com/container-platform/4.12/installing/installing_vsphere/installing-vsphere-installer-provisioned.html#installation-vsphere-installer-infra-requirements_installing-vsphere-installer-provisioned
