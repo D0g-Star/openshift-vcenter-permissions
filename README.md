@@ -27,7 +27,7 @@ Note that the `/vm/`, `/host/` and `/Resources/` sections of the paths are requi
 ## Updates
 * Last updated for Openshift 4.13 and vCenter : 7.0 Update 2 or later, as detailed in: https://docs.openshift.com/container-platform/4.13/installing/installing_vsphere/installing-vsphere-installer-provisioned.html
 
-*Last updated for OpenShift 4.12 and vCenter 7.0.2+, as detailed in this doc with a comically long URL:
+* Last updated for OpenShift 4.12 and vCenter 7.0.2+, as detailed in this doc with a comically long URL:
 https://docs.openshift.com/container-platform/4.12/installing/installing_vsphere/installing-vsphere-installer-provisioned.html#installation-vsphere-installer-infra-requirements_installing-vsphere-installer-provisioned
 
 To update this script for new versions, simply copy the new list of privileges from the doc and paste it into the corresponding text file in the [privileges](/privileges) directory. There is one text file for each group of privileges listed in the doc.
